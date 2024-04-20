@@ -15,8 +15,7 @@ PlasmoidItem {
     readonly property var switches: JSON.parse(Plasmoid.configuration.switches)
     readonly property bool hasSwitch: switches
 
-    property string onScript: Plasmoid.configuration.onScript
-    property string offScript: Plasmoid.configuration.offScript
+
 
     Plasma5Support.DataSource {
         id: executable
@@ -31,7 +30,7 @@ PlasmoidItem {
                     switchItem.checked = data['exit code'] === 0;
                 } else {
                     if (switchItem.checked && data['exit code'] !== 0) {
-                        switchItem.checked = !checked;
+                        switchItem.checked = checked;
                     }
                 }
             }
