@@ -1,8 +1,8 @@
 {
     "KPackageStructure": "Plasma/Applet",
     "KPlugin": {
-        "Name": "Ultimat-Switchs",
-        "Id": "com.xkain.Ultimat-Switchs",
+        "Name": "Ultimat-ToggleSwitch",
+        "Id": "com.xkain.Ultimat-ToggleSwitch",
         "Description": "Configurable switchs to launch scripts",
         "Category": "Utilities",
         "ServiceTypes": [
