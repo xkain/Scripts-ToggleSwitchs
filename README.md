@@ -1,23 +1,17 @@
-# Ultimat-Switchs
-Plasmoid switch configurable to launch scripts
+# On-Off Ultimat ToggleSwitch Plasmoid 
 
-In development
-
-
-
-# On-Off ToggleSwitch Plasmoid (for Plasma 6 )
-
+*In development
 
 This is a plasmoid runs scripts with configurable on/off switches for KDE Plasma 6.
 
 
-## Feature 
+## Feature :
 - dynamically generated toggleswitch
 - configurations for each toggleswitch
 - Click to execute a command/script
 
 
-## Captures
+## Captures :
 
 <p align="center">
 
@@ -29,7 +23,7 @@ This is a plasmoid runs scripts with configurable on/off switches for KDE Plasma
    
 </p>
 
-## Todo 
+## Todo :
 - implement compactRepresentation and fullRepresentation
 - master toggleswitch controls all toggleswitch position in group
 - return position after passing exit 1 to exit 0
@@ -42,4 +36,4 @@ This is a plasmoid runs scripts with configurable on/off switches for KDE Plasma
 
 
 
-## I'm not a developer, I'm trying to learn to carry out this project, help would be welcome. 
+ *I'm not a developer, I'm trying to learn to carry out this project, help would be welcome. 
