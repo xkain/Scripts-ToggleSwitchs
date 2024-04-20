@@ -1,0 +1,26 @@
+{
+    "KPackageStructure": "Plasma/Applet",
+    "KPlugin": {
+        "Name": "Ultimat-Switchs",
+        "Id": "com.xkain.Ultimat-Switchs",
+        "Description": "Configurable switchs to launch scripts",
+        "Category": "Utilities",
+        "ServiceTypes": [
+            "Plasma/Applet"
+        ],
+		"Icon": "adjustrgb-symbolic",
+		"Authors": [
+			{
+				"Email": "xkain123@gmail.com",
+				"Name": "xkain"
+			}
+		],
+        "Version": "1.0",
+		"License": "GPL-3.0",
+		"Website": "https://github.com/xkain/Ultimat-Switchs",
+		"BugReportUrl": "https://github.com/xkain/Ultimat-Switchs/issues"
+    },
+    "X-Plasma-API-Minimum-Version": "6.0",
+    "X-Plasma-API": "declarativeappletscript",
+    "X-Plasma-MainScript": "ui/main.qml"
+}
