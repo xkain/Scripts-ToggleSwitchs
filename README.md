@@ -5,12 +5,6 @@
 This is a plasmoid runs scripts with configurable on/off switches for KDE Plasma 6.
 
 
-## Feature :
-- dynamically generated toggleswitch
-- configurations for each toggleswitch
-- Click to execute a command/script
-
-
 ## Captures :
 
 <p align="center">
@@ -23,17 +17,64 @@ This is a plasmoid runs scripts with configurable on/off switches for KDE Plasma
    
 </p>
 
-## Todo :
-- implement compactRepresentation and fullRepresentation
-- master toggleswitch controls all toggleswitch position in group
-- return position after passing exit 1 to exit 0
-- implement label for each toggleswitch
-- Watch the state on startup
-- run on startup
-- Run periodically and choose time
-- choice of default theme color or custom color
-- notifications custom (titre/text/icon)
+
+## Current and *planned* features
+
+* [X] compactRepresentation and fullRepresentation
+   * [x] open fullRepresentation with middle click
+   * [x] toggleswitch in compactRepresentation
+   * [x] dynamically generated toggleswitch in fullRepresentation
+  
+</br>
+
+* [x] Label
+   * [x] Label for each toggleswitch
+   * [x] display the label or not
+   * [x] choice label color
+   * [x] choice label bolt
+   * [x] italic label choice
+   * [ ] choice font label
+         
+</br>
+
+* [x] Script
+   * [x] If the script returns exit 0 the toggleswitch will remain in its position
+   * [x] If the script returns exit 1 the toggleswitch will return to its initial position
+   * [x] choice to run the script at startup
+
+</br>
+
+* [x] Position
+   * [x] Toggleswitch in compactRepresentation can control the position of all toggleswitches in fullRepresentation
+   * [x] Group toggleswitches create a new column / “normal” toggleswitches are placed below the Group toggleswitches that they depend on.
+   * [x] Group toggleswitches can control the position of toggleswitches below it
+   * [x] Toggleswitch in compactRepresentation can remember the last position before reboot / can choose default position
+   * [ ] Toggleswitch in fullRepresentation can remember the last position after reboot
+   * [x] Choose default position of toggleswitches in fullRepresentation at startup
+
+</br>
+
+* [x] Notification
+   * [x] Enable or not a notification
+   * [x] Choose the title
+   * [x] Choose text
+   * [x] Choose icon
+
+</br>
+
+* [x] ToolTip
+    * [x] Display or not tooltip
+    * [x] Choose text
+    * [ ] Displays script returns
+
+ </br>
+
+  * [ ] Keyboard shortcut 
+  * [ ] translation
+  * [ ] Color choice Toggleswitch
+  * [ ] Documentation
 
 
 
- *I'm not a developer, I'm trying to learn to carry out this project, help would be welcome. 
+
+ *I'm not a developer, I'm trying to learn to carry out this project, any help is welcome. 
