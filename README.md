@@ -1,4 +1,4 @@
-# On-Off Ultimat ToggleSwitch Plasmoid 
+# On-Off Scripts ToggleSwitchs Plasmoid 
 
 *In development
 
@@ -9,9 +9,16 @@ This is a plasmoid runs scripts with configurable on/off switches for KDE Plasma
 
 <p align="center">
 
-![Copie d'écran_20240420_122343](https://github.com/xkain/Ultimat-Switchs/assets/93977698/a92bb5fc-fa72-4654-9bf2-816af2c109e2)
+![001](https://github.com/xkain/Scripts-ToggleSwitchs/assets/93977698/f32ab56a-35ca-4cdc-a865-01f43a38b494)
 
-![Copie d'écran_20240420_122402](https://github.com/xkain/Ultimat-Switchs/assets/93977698/4b4f2bc8-72b6-4258-a789-38df82f9f8a2)
+
+
+![002](https://github.com/xkain/Scripts-ToggleSwitchs/assets/93977698/8530700b-31c9-46d4-bc1c-632a37b6e09c)
+
+
+
+![003](https://github.com/xkain/Scripts-ToggleSwitchs/assets/93977698/b2c4ba46-3fc1-4f8f-bce2-584276ac013a)
+
 
 </br>
    
@@ -65,16 +72,18 @@ This is a plasmoid runs scripts with configurable on/off switches for KDE Plasma
 * [x] ToolTip
     * [x] Display or not tooltip
     * [x] Choose text
-    * [ ] Displays script returns
-
+    * [ ] Displays script output
+         * [x] For compactRepresentation
+         * [ ] fullRepresentation
  </br>
 
   * [ ] Keyboard shortcut 
   * [ ] translation
+     * [x] French
   * [ ] Color choice Toggleswitch
   * [ ] Documentation
 
 
 
 
- *I'm not a developer, I'm trying to learn to carry out this project, any help is welcome. 
+ *Any help is welcome. 
