@@ -1,3 +1,8 @@
+/*
+ *    SPDX-FileCopyrightText: 2012 xkain <xkain123@gmail.com>
+ *
+ *    SPDX-License-Identifier: GPL-2.0-only OR GPL-3.0-only
+ */
 import QtQuick
 import QtQuick.Layouts
 import QtQuick.Controls as QQC2
@@ -5,89 +10,248 @@ import QtQml.Models
 import org.kde.plasma.plasmoid
 import org.kde.kcmutils as KCM
 import org.kde.kirigami as Kirigami
+import QtQuick.Dialogs
 
 KCM.ScrollViewKCM {
     id: root
+
+    property string cfg_switches: ""
     property alias switchModel: switchModel
+    property int groupCounter: 1
+    property int mainCounter: 1
 
 
-    property string cfg_switches
-
-
-    property string cfg_statusScriptEnabled: statusScriptEnabledBox.checked
-
-    property string cfg_statusScript: checkStatusScriptText.text
-    property string cfg_runStatusOnStart: runStatusScriptBox.checked
-    property string cfg_updateInterval: updateIntervalSpinBox.value
-    property string cfg_updateIntervalUnit: updateIntervalUnitSpinBox.value
-
-
-
-    function setInterval() {
-        if (updateIntervalUnitSpinBox.value == 1) {
-            plasmoid.configuration.interval = updateIntervalSpinBox.value * 60;
-        } else if (updateIntervalUnitSpinBox.value == 2) {
-            plasmoid.configuration.interval = updateIntervalSpinBox.value * 60 * 60;
-        } else {
-            plasmoid.configuration.interval = updateIntervalSpinBox.value;
-        }
-    }
+// HACK: Present to suppress errors
+    property string cfg_iconName
+    property string cfg_iconNameDefault
+    property string cfg_compactName
+    property string cfg_compactNameDefault
+    property bool cfg_boldTextCompact
+    property bool cfg_boldTextCompactDefault
+    property bool cfg_italicTextCompact
+    property bool cfg_italicTextCompactDefault
+    property string cfg_compactNameColor
+    property string cfg_compactNameColorDefault
+    property bool cfg_compactLabelVisible
+    property bool cfg_compactLabelVisibleDefault
+    property string cfg_oncompactScript
+    property string cfg_oncompactScriptDefault
+    property string cfg_offcompactScript
+    property string cfg_offcompactScriptDefault
+    property bool cfg_runStatusOnStartCompact
+    property bool cfg_runStatusOnStartCompactDefault
+    property bool cfg_compactDefaultPosition
+    property bool cfg_compactDefaultPositionDefault
+    property bool cfg_compactCustomDefaultPosition
+    property bool cfg_compactCustomDefaultPositionDefault
+    property string cfg_toolTipMainCompactText
+    property string cfg_toolTipMainCompactTextDefault
+    property string cfg_toolTipSubCompactText
+    property string cfg_toolTipSubCompactTextDefault
+    property bool cfg_toolTipSubCompactTextOutPut
+    property bool cfg_toolTipSubCompactTextOutPutDefault
+    property bool cfg_intervalRun
+    property bool cfg_intervalRunDefault
+    property int cfg_interval
+    property int cfg_intervalDefault
+    property bool cfg_startnotifOnCompact
+    property bool cfg_startnotifOnCompactDefault
+    property string cfg_notifTitleOnCompact
+    property string cfg_notifTitleOnCompactDefault
+    property string cfg_notifTextOnCompact
+    property string cfg_notifTextOnCompactDefault
+    property string cfg_iconOnCompact
+    property string cfg_iconOnCompactDefault
+    property bool cfg_startnotifOffCompact
+    property bool cfg_startnotifOffCompactDefault
+    property string cfg_notifTitleOffCompact
+    property string cfg_notifTitleOffCompactDefault
+    property string cfg_notifTextOffCompact
+    property string cfg_notifTextOffCompactDefault
+    property string cfg_iconOffCompact
+    property string cfg_iconOffCompactDefault
+    property bool cfg_switchesDefault
+    property bool cfg_checked
+    property bool cfg_checkedDefault
 
     onVisibleChanged: {
         if (!visible)
-            switchModel.save();
+            switchModel.saveConfigurations();
     }
-
 
     ListModel {
         id: switchModel
 
+        Component.onCompleted: {
+            loadConfigurations();
+            updateGridPositions();
+        }
 
-        Component.onCompleted: { switchModel.loadString(root.cfg_switches); }
-
-
-        function loadString(string) {
+        function loadConfigurations() {
             clear();
-            let switches = JSON.parse(string);
-            switches.forEach(function(switchis) {
-                addSwitch(switchis.name, switchis.switchId, switchis.isMaster, switchis.isMain, switchis.checked, switchis.defaultPosition, switchis.onScriptEnabled, switchis.offScriptEnabled, switchis.onScript, switchis.offScript, switchis.statusScriptEnabled, switchis.statusScript, switchis.runStatusOnStart, switchis.updateInterval, switchis.updateIntervalUnitl, switchis.interval
-                );
+            var dataString = root.cfg_switches.trim();
+            if (dataString === "") {
+                loadDefaultConfiguration();
+                return;
+            }
+            parseConfiguration(dataString);
+        }
+
+        function parseConfiguration(dataString) {
+            try {
+                let configurations = JSON.parse(dataString);
+                configurations.forEach(switchItem => {
+                    addSwitchFromObject(switchItem);
+                });
+            } catch (e) {
+                loadDefaultConfiguration();
+            }
+        }
+
+         function loadDefaultConfiguration() {
+            addSwitch(
+                 i18n("Default Group Switch"), "defaultGroupSwitch", true, false,
+                    "0", "0",
+                    false,
+                    true, false,
+                    false, false,
+                    "sleep 5; exit 0","sleep 5; exit 0", true,
+                    true, "", false, false,
+                    true, i18n("Default Group Switch"), i18n("This is the description of the Default Group Switch. Switch Groups create a new column and can control the position of all the switches that are in their column."),
+                    true, true,
+                    i18n("Switch activation"), i18n("This notification is displayed because the Default switch Group has been activated."), "emblem-success",
+                    i18n("Switch deactivation"), i18n("This notification is displayed because the Default switch Group has been deactivated."), "emblem-remove"
+            );
+        }
+
+        function addSwitchFromObject(switchItem) {
+            addSwitch(
+                switchItem.name, switchItem.switchId, switchItem.isGroup, switchItem.isMain,
+                switchItem.rowIndex, switchItem.columnIndex,
+                switchItem.checked,
+                switchItem.defaultPosition, switchItem.customDefaultPosition,
+                switchItem.positionByCompact, switchItem.positionByGroup,
+                switchItem.onScript, switchItem.offScript, switchItem.runStatusOnStart,
+                switchItem.displayName, switchItem.switchNameColor, switchItem.boldText, switchItem.italicText,
+                switchItem.tooltipFullEnabled, switchItem.toolTipFullMainText, switchItem.toolTipFullSubText,
+                switchItem.startnotifOn, switchItem.startnotifOff,
+                switchItem.notificationTitleOn, switchItem.notificationTextOn, switchItem.iconOn,
+                switchItem.notificationTitleOff, switchItem.notificationTextOff, switchItem.iconOff
+            );
+        }
+
+        function addSwitch(name, switchId, isGroup, isMain,
+                           rowIndex, columnIndex,
+                           checked,
+                           defaultPosition, customDefaultPosition,
+                           positionByCompact, positionByGroup,
+                           onScript, offScript, runStatusOnStart,
+                           displayName, switchNameColor, boldText, italicText,
+                           tooltipFullEnabled, toolTipFullMainText, toolTipFullSubText,
+                           startnotifOn, startnotifOff,
+                           notificationTitleOn, notificationTextOn, iconOn,
+                           notificationTitleOff, notificationTextOff, iconOff
+        ) {
+
+
+
+            append({
+                "name": name, "switchId": switchId, "isGroup": isGroup, "isMain": isMain,
+                "rowIndex": Number(rowIndex), "columnIndex": Number(columnIndex),
+                "checked": checked,
+                "defaultPosition": defaultPosition, "customDefaultPosition": customDefaultPosition,
+                "positionByCompact": positionByCompact, "positionByGroup": positionByGroup,
+                "onScript": onScript, "offScript": offScript, "runStatusOnStart": runStatusOnStart,
+                "displayName": displayName, "switchNameColor": switchNameColor, "boldText": boldText, "italicText": italicText,
+                "tooltipFullEnabled": tooltipFullEnabled, "toolTipFullMainText": toolTipFullMainText, "toolTipFullSubText": toolTipFullSubText,
+                "startnotifOn": startnotifOn, "startnotifOff": startnotifOff,
+                "notificationTitleOn": notificationTitleOn, "notificationTextOn": notificationTextOn, "iconOn": iconOn,
+                "notificationTitleOff": notificationTitleOff, "notificationTextOff": notificationTextOff, "iconOff": iconOff
             });
         }
 
-        function addSwitch(name, switchId, isMaster, isMain, checked, defaultPosition, onScriptEnabled, offScriptEnabled, onScript, offScript, statusScriptEnabled, statusScript, runStatusOnStart, updateInterval, updateIntervalUnitl, interval) {
-
-            append({
-                "name": name, "switchId": switchId, "isMaster": isMaster, "isMain": isMain, "checked": checked, "defaultPosition": defaultPosition, "onScriptEnabled": onScriptEnabled, "offScriptEnabled": offScriptEnabled, "onScript": onScript, "offScript": offScript,
-                "statusScriptEnabled": statusScriptEnabled, "statusScript": statusScript,"runStatusOnStart": runStatusOnStart, "updateInterval": updateInterval, "updateIntervalUnitl": updateIntervalUnitl,"interval": interval});
-        }
-
-        function save() {
-            var switchList = [];
+        function saveConfigurations() {
+            var configArray = [];
             for (var i = 0; i < count; ++i) {
-                switchList.push(get(i));
+                configArray.push(get(i));
             }
-            root.cfg_switches = JSON.stringify(switchList);
+            root.cfg_switches = JSON.stringify(configArray);
         }
 
-
-        property string roleLabel: ""
-
-        function updateLabels() {
-            for (var i = 0; i < count; ++i) {
-                var switchis = get(i);
-                if (switchis.isMaster)
-                    setProperty(i, "roleLabel", "Master");
-                else
-                    setProperty(i, "roleLabel", "Main");
+        function updateGridPositions() {
+            var groupColumnIndex = 0;
+            var mainRowIndex = [];
+            for (var i = 0; i < count; i++) {
+                var item = get(i);
+                if (item.isGroup) {
+                    setProperty(i, "columnIndex", groupColumnIndex);
+                    setProperty(i, "rowIndex", 0);
+                    mainRowIndex[groupColumnIndex] = 1;
+                    groupColumnIndex++;
+                } else if (item.isMain) {
+                    var columnIndex = groupColumnIndex - 1;
+                    setProperty(i, "columnIndex", columnIndex);
+                    setProperty(i, "rowIndex", mainRowIndex[columnIndex]);
+                    mainRowIndex[columnIndex]++;
+                }
             }
         }
-
-        onCountChanged: updateLabels()
     }
 
-    header: ColumnLayout {
-        spacing: Kirigami.Units.smallSpacing
+     function generateUniqueSwitchId(prefix) {
+        var counter = prefix === "isMain" ? root.mainCounter : root.groupCounter;
+        var newId = prefix + "_" + counter;
+        var takenIds = getTakenSwitchIds(prefix);
+        if (takenIds.length === 0) {
+            return newId;
+        }
+
+        var availableId = findAvailableId(takenIds, prefix);
+        if (availableId) {
+            return availableId;
+        }
+
+        while (isSwitchIdTaken(newId)) {
+            counter++;
+            newId = prefix + "_" + counter;
+        }
+
+        if (prefix === "isMain") {
+            root.mainCounter = counter + 1;
+        } else {
+            root.groupCounter = counter + 1;
+        }
+
+        return newId;
+    }
+
+    function getTakenSwitchIds(prefix) {
+        var takenIds = [];
+        for (var i = 0; i < switchModel.count; ++i) {
+            var switchId = switchModel.get(i).switchId;
+            if (switchId.startsWith(prefix + "_")) {
+                takenIds.push(parseInt(switchId.split("_")[1], 10));
+            }
+        }
+        return takenIds.sort((a, b) => a - b);
+    }
+
+    function findAvailableId(takenIds, prefix) {
+        for (var i = 1; i <= takenIds[takenIds.length - 1]; i++) {
+            if (!takenIds.includes(i)) {
+                return prefix + "_" + i;
+            }
+        }
+        return null;
+    }
+
+    function isSwitchIdTaken(id) {
+        for (var i = 0; i < switchModel.count; ++i) {
+            if (switchModel.get(i).switchId === id) {
+                return true;
+            }
+        }
+        return false;
     }
 
     view: ListView {
@@ -95,6 +259,7 @@ KCM.ScrollViewKCM {
         clip: true
         reuseItems: true
         model: switchModel
+        spacing: 1
 
         delegate: Item {
             width: switchView.width
@@ -112,20 +277,21 @@ KCM.ScrollViewKCM {
                         listView: switchView
                         onMoveRequested: (oldIndex, newIndex) => {
                             switchModel.move(oldIndex, newIndex, 1);
-                            switchModel.save();
+                            switchModel.updateGridPositions();
+                            switchModel.saveConfigurations();
                         }
                     }
 
                     QQC2.Label {
-                        Layout.minimumWidth : 60
-                        text: roleLabel
+                        Layout.minimumWidth: isMain ? 70 : 50
                         font.italic: true
                         font.pixelSize: 10
                     }
 
                     QQC2.Label {
                         Layout.fillWidth: true
-                        text: name
+                            text:  name
+                        font.bold : isGroup
                     }
                 }
 
@@ -133,54 +299,83 @@ KCM.ScrollViewKCM {
                     Kirigami.Action {
                         text: i18n("Edit")
                         icon.name: "edit-entry-symbolic"
-                        onTriggered: editSwitchSheet.openSwitch(index)
+                        onTriggered: {
+                            editSwitchSheetLoader.item.openSwitch(index)
+                           //onTriggered: editSwitchSheet.openSwitch(index)
+                        }
                     },
                     Kirigami.Action {
                         text: i18n("Delete")
                         icon.name: "edit-delete-remove-symbolic"
+                        visible: model.switchId !== "defaultGroupSwitch"
                         onTriggered: {
                             switchModel.remove(index, 1);
-                            switchModel.save();
+                            switchModel.updateGridPositions();
+                            switchModel.saveConfigurations();
                         }
                     }
                 ]
-
             }
-        }
-
-        Kirigami.PlaceholderMessage {
-            anchors.centerIn: parent
-            visible: switchModel.count === 0
-            icon.name: "adjustrgb-symbolic"
-            text: "No Switch"
-            explanation: "Click <i>%1</i> to get started".arg(addSwitchButton.text)
         }
     }
 
     footer: RowLayout {
-        spacing: Kirigami.Units.smallSpacing
+        spacing: Kirigami.Units.mediumSpacing
+        anchors.fill: parent
 
         QQC2.Button {
-            id: addSwitchButtonMaster
+            id: addSwitchButtonGroup
             Layout.leftMargin: Kirigami.Units.largeSpacing - 6
-            text: "Add Switch Master…"
+            text: i18n("Add Switch Group…")
             icon.name: "list-add-symbolic"
             onClicked: {
-                var switchId = "isMaster_" + new Date().getTime();
-                switchModel.addSwitch("Nom du switch ici", switchId, true, false, false, false, false, false, "sleep 3; exit 0", "dolphin; exit 1", false, "/bin/status_script.sh", false, "2", "1", "120");
-                switchModel.save();
+                var switchId = generateUniqueSwitchId("isGroup");
+                var suffix = switchId.split('_')[1];
+                var fullName = `${i18n("Group")} ${suffix}`;
+
+                switchModel.addSwitch(
+                    fullName, switchId, true, false,
+                    "0", "0",
+                    false,
+                    true, false,
+                    false, false,
+                    "sleep 5; exit 0", "sleep 5; exit 0", false,
+                    true, "", true, false,
+                    false, fullName, i18n("This is the description of the Group Switch. Switch Groups create a new column and can control the position of all the switches that are in their column."),
+                    false, false,
+                    i18n("Switch activation"), i18n("This notification is displayed because the switch Group has been activated."), "emblem-success",
+                    i18n("Switch deactivation"), i18n("This notification is displayed because the switch Group has been deactivated."), "emblem-remove"
+                );
+                switchModel.updateGridPositions();
+                switchModel.saveConfigurations();
             }
         }
 
         QQC2.Button {
             id: addSwitchButton
             Layout.leftMargin: Kirigami.Units.largeSpacing - 6
-            text: "Add Switch…"
+            text: i18n("Add Switch…")
             icon.name: "list-add-symbolic"
             onClicked: {
-                var switchId = "isMain_" + new Date().getTime();
-                switchModel.addSwitch("Nom du switch ici", switchId,false, true, false, false, false, false, "dolphin; exit 1", "sleep 3; exit 0", false, "/bin/status_script.sh", false, "2", "1", "120");
-                switchModel.save();
+                var switchId = generateUniqueSwitchId("isMain");
+                var suffix = switchId.split('_')[1];
+                var fullName = `${i18n("Switch")} ${suffix}`;
+
+                switchModel.addSwitch(
+                    fullName, switchId, false, true,
+                    "0", "0",
+                    false,
+                    true, false,
+                    false, true,
+                    "sleep 5; exit 1", "sleep 5; exit 0", false,
+                    true, "", false, true,
+                    true, fullName, i18n("This is the description of a normal Switch. It is always placed below a Switch Group, and its activation can be controlled by a Switch Group."),
+                                      false, false,
+                                      i18n("Switch activation"), i18n("This notification is displayed because the switch has been activated."), "emblem-success",
+                                      i18n("Switch deactivation"), i18n("This notification is displayed because the switch has been deactivated."), "emblem-remove"
+                );
+                switchModel.updateGridPositions();
+                switchModel.saveConfigurations();
             }
         }
 
@@ -189,184 +384,13 @@ KCM.ScrollViewKCM {
         }
     }
 
-    Kirigami.OverlaySheet {
-        id: editSwitchSheet
-        property var editingSwitch: null
-        width:  Kirigami.Units.gridUnit * 30
-        height: editSwitchesForm.implicitHeight + Kirigami.Units.gridUnit * 25
-        title: "Edit Switch"
-
-        Kirigami.FormLayout {
-            id: editSwitchesForm
-            anchors.fill: parent
-            //wideMode: false
-
-
-            QQC2.CheckBox {
-                id: swapLabelsBox
-                Layout.minimumWidth: 100
-                Kirigami.FormData.label: "Labels :"
-                text: "Show the switch name on the top"
-                Layout.fillWidth: true
-                font.italic: true
-
-                onCheckedChanged: { cfg_swapLabels = editingSwitch.name; }
-            }
-
-            QQC2.TextField {
-                id: switchNameField
-                Layout.fillWidth: true
-                Kirigami.FormData.label: "Name :"
-
-
-                onTextChanged: {
-                    editSwitchSheet.editingSwitch.name = text;
-                    switchModel.save();
-                }
-            }
-
-            QQC2.CheckBox {
-                id: defaultPositionBox
-                Layout.fillWidth: true
-                Kirigami.FormData.label: "Position :"
-                font.italic: true
-                text: "switch positon activate"
-                onCheckedChanged: {
-                    if (editSwitchSheet.editingSwitch) {
-                        editSwitchSheet.editingSwitch.defaultPosition = checked;
-                        switchModel.save();
-                    }
-                }
-            }
-
-            QQC2.TextField {
-                id: onScriptText
-                Layout.fillWidth: true
-                Kirigami.FormData.label: "On-Script :"
-                placeholderText: i18nc("@info:placeholder", "exemple : sleep 2; exit 0")
-                onTextChanged: {
-                    if (editSwitchSheet.editingSwitch) {
-                        editSwitchSheet.editingSwitch.onScript = text;
-                        switchModel.save();
-                    }
-                }
-            }
-
-            QQC2.TextField {
-                id: offScriptText
-                Kirigami.FormData.label: "Off-Script :"
-                Layout.fillWidth: true
-                placeholderText: i18nc("@info:placeholder", " exemple : sleep 1; exit 0")
-                onTextChanged: {
-                    if (editSwitchSheet.editingSwitch) {
-                        editSwitchSheet.editingSwitch.offScript = text;
-                        switchModel.save();
-                    }
-                }
-            }
-
-            QQC2.CheckBox {
-                Layout.row: 7
-                Layout.column: 1
-                id: statusScriptEnabledBox
-                text: i18n("Run periodically")
-                onCheckedChanged: {
-                    if (editSwitchSheet.editingSwitch) {
-                        editSwitchSheet.editingSwitch.statusScriptEnabledBox = checked;
-                        checkStatusScriptText.forceActiveFocus();
-                        switchModel.save();
-                    }
-                }
-            }
-
-            QQC2.TextField {
-                id: checkStatusScriptText
-                Kirigami.FormData.label: "Script :"
-                Layout.minimumWidth: 300
-                enabled: statusScriptEnabledBox.checked
-            }
-
-            GridLayout {
-                columns: 2
-                Layout.row: 9
-                Layout.column: 1
-                QQC2.SpinBox {
-                    Layout.row: 0
-                    Layout.column: 0
-                    id: updateIntervalSpinBox
-                    Kirigami.FormData.label: "Run every :"
-
-                    enabled: statusScriptEnabledBox.checked
-                    stepSize: 1
-                    from: 1
-                    onValueModified: setInterval()
-                }
-                QQC2.SpinBox {
-                    Layout.row: 0
-                    Layout.column: 1
-                    id: updateIntervalUnitSpinBox
-                    enabled: statusScriptEnabledBox.checked
-                    from: 0
-                    to: items.length - 1
-                    onValueModified: setInterval()
-
-                    property var items: ["s", "min", "h"]
-
-                    validator: RegularExpressionValidator {
-                        regularExpression: /(s|min|h)/i
-                    }
-
-                    textFromValue: function(value) {
-                        return items[value];
-                    }
-
-                    valueFromText: function(text) {
-                        for (var i = 0; i < items.length; ++i) {
-                            if (items[i].toLowerCase().indexOf(text.toLowerCase()) === 0)
-                                return i
-                        }
-                        return sb.value
-                    }
-                }
-            }
-            QQC2.CheckBox {
-                Layout.row: 10
-                Layout.column: 1
-                id: runStatusScriptBox
-                text: i18n("Check status on startup")
-            }
-
-            QQC2.Button {
-                id: doneButton
-                Layout.fillWidth: true
-                Layout.rightMargin: Kirigami.Units.largeSpacing - 2
-                icon.name: "edit-delete-remove-symbolic"
-                text: i18nc("@action:button", "Done")
-                onClicked: {
-                    switchModel.save();
-                    editSwitchSheet.close();
-                }
-            }
-        }
-
-        onEditingSwitchChanged: {
-            if (editSwitchSheet.editingSwitch) {
-                switchNameField.text = editingSwitch.name;
-                defaultPositionBox.checked = editingSwitch.defaultPosition;
-                onScriptText.text = editingSwitch.onScript;
-                offScriptText.text = editingSwitch.offScript;
-                statusScriptEnabledBox.checked = editingSwitch.statusScriptEnabled;
-            }
-        }
-
-        function openSwitch(index) {
-            if (index >= 0 && index < switchModel.count) {
-                editingSwitch = switchModel.get(index);
-                editSwitchSheet.open();
-            } else {
-                editingSwitch = null;
-                console.error("Invalid switch index:", index);
-            }
-        }
-    }
+     Loader {
+    		id: editSwitchSheetLoader
+                source: "EditSwitchDialog.qml"
+                width:  Kirigami.Units.gridUnit * 30
+                height: editSwitchesForm.implicitHeight + Kirigami.Units.gridUnit * 30
+    	}
 }
+
+
+

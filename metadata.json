@@ -1,26 +1,22 @@
 {
-    "KPackageStructure": "Plasma/Applet",
-    "KPlugin": {
-        "Name": "Ultimat-ToggleSwitch",
-        "Id": "com.xkain.Ultimat-ToggleSwitch",
-        "Description": "Configurable switchs to launch scripts",
-        "Category": "Utilities",
-        "ServiceTypes": [
-            "Plasma/Applet"
-        ],
-		"Icon": "adjustrgb-symbolic",
+	"KPackageStructure": "Plasma/Applet",
+	"KPlugin": {
 		"Authors": [
 			{
 				"Email": "xkain123@gmail.com",
 				"Name": "xkain"
 			}
 		],
-        "Version": "1.0",
+		"Category": "Utilities",
+		"Description": "Configurable ToggleSwitchs to launch scripts",
+		"Description[fr]": "Interrupteurs configurables pour lancer des scripts.",
+		"Icon": "adjustrgb-symbolic",
+		"Id": "com.xkain.Scripts-ToggleSwitchs",
 		"License": "GPL-3.0",
-		"Website": "https://github.com/xkain/Ultimat-Switchs",
-		"BugReportUrl": "https://github.com/xkain/Ultimat-Switchs/issues"
-    },
-    "X-Plasma-API-Minimum-Version": "6.0",
-    "X-Plasma-API": "declarativeappletscript",
-    "X-Plasma-MainScript": "ui/main.qml"
+		"Name": "Scripts ToggleSwitchs",
+		"Name[fr]": "Scripts Interrupteurs",
+		"Version": "1.0",
+		"Website": "https://github.com/xkain/Scripts-ToggleSwitchs"
+	},
+	"X-Plasma-API-Minimum-Version": "6.0"
 }

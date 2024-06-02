@@ -1,0 +1,276 @@
+# Translation of Scripts-ToggleSwitchs in LANGUAGE
+# Copyright (C) 2024
+# This file is distributed under the same license as the Scripts-ToggleSwitchs package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Scripts-ToggleSwitchs\n"
+"Report-Msgid-Bugs-To: https://github.com/xkain/Scripts-ToggleSwitchs\n"
+"POT-Creation-Date: 2024-06-02 20:59+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../metadata.json ../contents/ui/main.qml
+msgid "Scripts ToggleSwitchs"
+msgstr ""
+
+#: ../metadata.json
+msgid "Configurable ToggleSwitchs to launch scripts."
+msgstr ""
+
+#: ../contents/config/config.qml
+msgid "Compact Switch"
+msgstr ""
+
+#: ../contents/config/config.qml
+msgid "Extended Switches"
+msgstr ""
+
+#: ../contents/ui/configGeneral.qml ../contents/ui/EditSwitchDialog.qml
+msgid "Name Switch"
+msgstr ""
+
+#: ../contents/ui/configGeneral.qml
+msgid "Name :"
+msgstr ""
+
+#: ../contents/ui/configGeneral.qml ../contents/ui/EditSwitchDialog.qml
+msgctxt "@action:button"
+msgid "Clear Name"
+msgstr ""
+
+#: ../contents/ui/configGeneral.qml ../contents/ui/EditSwitchDialog.qml
+msgid "Options font :"
+msgstr ""
+
+#: ../contents/ui/configGeneral.qml ../contents/ui/EditSwitchDialog.qml
+msgctxt "@info:placeholder"
+msgid "exemple : #00ff00"
+msgstr ""
+
+#: ../contents/ui/configGeneral.qml ../contents/ui/EditSwitchDialog.qml
+msgid "Will be displayed on desktop"
+msgstr ""
+
+#: ../contents/ui/configGeneral.qml ../contents/ui/EditSwitchDialog.qml
+msgid "Scripts"
+msgstr ""
+
+#: ../contents/ui/configGeneral.qml ../contents/ui/EditSwitchDialog.qml
+msgid "Activated :"
+msgstr ""
+
+#: ../contents/ui/configGeneral.qml ../contents/ui/EditSwitchDialog.qml
+msgctxt "@info:placeholder"
+msgid "exemple : sleep 2; exit 0"
+msgstr ""
+
+#: ../contents/ui/configGeneral.qml
+msgctxt "@action:button"
+msgid "Clear script"
+msgstr ""
+
+#: ../contents/ui/configGeneral.qml ../contents/ui/EditSwitchDialog.qml
+msgid "Choose script for position activated"
+msgstr ""
+
+#: ../contents/ui/configGeneral.qml ../contents/ui/EditSwitchDialog.qml
+msgid "Disabled :"
+msgstr ""
+
+#: ../contents/ui/configGeneral.qml ../contents/ui/EditSwitchDialog.qml
+msgid "Run script at startup"
+msgstr ""
+
+#: ../contents/ui/configGeneral.qml
+msgid "Position"
+msgstr ""
+
+#: ../contents/ui/configGeneral.qml ../contents/ui/EditSwitchDialog.qml
+msgid "Position on startup :"
+msgstr ""
+
+#: ../contents/ui/configGeneral.qml
+msgid "Remembers last position"
+msgstr ""
+
+#: ../contents/ui/configGeneral.qml ../contents/ui/EditSwitchDialog.qml
+msgid "Disabled position"
+msgstr ""
+
+#: ../contents/ui/configGeneral.qml ../contents/ui/EditSwitchDialog.qml
+msgid "Position activated"
+msgstr ""
+
+#: ../contents/ui/configGeneral.qml ../contents/ui/EditSwitchDialog.qml
+msgid "ToolTip"
+msgstr ""
+
+#: ../contents/ui/configGeneral.qml ../contents/ui/EditSwitchDialog.qml
+msgctxt "@title:label"
+msgid "Title :"
+msgstr ""
+
+#: ../contents/ui/configGeneral.qml ../contents/ui/EditSwitchDialog.qml
+msgctxt "@title:label"
+msgid "Description :"
+msgstr ""
+
+#: ../contents/ui/configGeneral.qml
+msgid "Will display output script"
+msgstr ""
+
+#: ../contents/ui/configGeneral.qml
+msgid "Output script will refresh every :"
+msgstr ""
+
+#: ../contents/ui/configGeneral.qml
+msgid "ms"
+msgstr ""
+
+#: ../contents/ui/configGeneral.qml ../contents/ui/EditSwitchDialog.qml
+msgid "Notifications"
+msgstr ""
+
+#: ../contents/ui/configGeneral.qml ../contents/ui/EditSwitchDialog.qml
+msgid "Show notification when the switch becomes activated"
+msgstr ""
+
+#: ../contents/ui/configGeneral.qml ../contents/ui/EditSwitchDialog.qml
+msgctxt "@title:label"
+msgid "Text :"
+msgstr ""
+
+#: ../contents/ui/configGeneral.qml ../contents/ui/EditSwitchDialog.qml
+msgctxt "@title:label"
+msgid "Icon :"
+msgstr ""
+
+#: ../contents/ui/configGeneral.qml ../contents/ui/EditSwitchDialog.qml
+msgid "Show notification when switch becomes disabled"
+msgstr ""
+
+#: ../contents/ui/ConfigSwitch.qml
+msgid "Default Group Switch"
+msgstr ""
+
+#: ../contents/ui/ConfigSwitch.qml
+msgid "This is the description of the Default Group Switch. Switch Groups create a new column and can control the position of all the switches that are in their column."
+msgstr ""
+
+#: ../contents/ui/ConfigSwitch.qml
+msgid "Switch activation"
+msgstr ""
+
+#: ../contents/ui/ConfigSwitch.qml
+msgid "This notification is displayed because the Default switch Group has been activated."
+msgstr ""
+
+#: ../contents/ui/ConfigSwitch.qml
+msgid "Switch deactivation"
+msgstr ""
+
+#: ../contents/ui/ConfigSwitch.qml
+msgid "This notification is displayed because the Default switch Group has been deactivated."
+msgstr ""
+
+#: ../contents/ui/ConfigSwitch.qml
+msgid "Edit"
+msgstr ""
+
+#: ../contents/ui/ConfigSwitch.qml
+msgid "Delete"
+msgstr ""
+
+#: ../contents/ui/ConfigSwitch.qml
+msgid "Add Switch Group…"
+msgstr ""
+
+#: ../contents/ui/ConfigSwitch.qml
+msgid "Group"
+msgstr ""
+
+#: ../contents/ui/ConfigSwitch.qml
+msgid "This is the description of the Group Switch. Switch Groups create a new column and can control the position of all the switches that are in their column."
+msgstr ""
+
+#: ../contents/ui/ConfigSwitch.qml
+msgid "This notification is displayed because the switch Group has been activated."
+msgstr ""
+
+#: ../contents/ui/ConfigSwitch.qml
+msgid "This notification is displayed because the switch Group has been deactivated."
+msgstr ""
+
+#: ../contents/ui/ConfigSwitch.qml
+msgid "Add Switch…"
+msgstr ""
+
+#: ../contents/ui/ConfigSwitch.qml
+msgid "Switch"
+msgstr ""
+
+#: ../contents/ui/ConfigSwitch.qml
+msgid "This is the description of a normal Switch. It is always placed below a Switch Group, and its activation can be controlled by a Switch Group."
+msgstr ""
+
+#: ../contents/ui/ConfigSwitch.qml
+msgid "This notification is displayed because the switch has been activated."
+msgstr ""
+
+#: ../contents/ui/ConfigSwitch.qml
+msgid "This notification is displayed because the switch has been deactivated."
+msgstr ""
+
+#: ../contents/ui/EditSwitchDialog.qml
+msgid "Edit Switch"
+msgstr ""
+
+#: ../contents/ui/EditSwitchDialog.qml
+msgid "Follow Compact :"
+msgstr ""
+
+#: ../contents/ui/EditSwitchDialog.qml
+msgid "It will follow the position of the Compact Switch"
+msgstr ""
+
+#: ../contents/ui/EditSwitchDialog.qml
+msgid "Follow Group :"
+msgstr ""
+
+#: ../contents/ui/EditSwitchDialog.qml
+msgid "It will follow the position of the Group switch"
+msgstr ""
+
+#: ../contents/ui/EditSwitchDialog.qml
+msgid "Show ToolTip :"
+msgstr ""
+
+#: ../contents/ui/EditSwitchDialog.qml
+msgid "Display a tooltip on switch when mouse hover."
+msgstr ""
+
+#: ../contents/ui/IconPicker.qml
+msgctxt "@item:inmenu Open icon chooser dialog"
+msgid "Choose..."
+msgstr ""
+
+#: ../contents/ui/IconPicker.qml
+msgctxt "@item:inmenu Reset icon to default"
+msgid "Clear Icon"
+msgstr ""
+
+#: ../contents/ui/main.qml
+msgid "Configurable switches to launch scripts."
+msgstr ""
+
+#: ../contents/ui/main.qml
+msgid "The switch has been activated"
+msgstr ""

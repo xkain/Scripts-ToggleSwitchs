@@ -1,93 +1,128 @@
 <!--
-SPDX-FileCopyrightText: 2023 Oliver Beard <olib141@outlook.com>
-SPDX-License-Identifier: MIT
+SPDX-FileCopyrightText: 2012 xkain <xkain123@gmail.com>
+SPDX-License-Identifier: LGPL-2.0-or-later
 -->
 
 <kcfg xmlns="http://www.kde.org/standards/kcfg/1.0"
       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
       xsi:schemaLocation="http://www.kde.org/standards/kcfg/1.0
       http://www.kde.org/standards/kcfg/1.0/kcfg.xsd" >
-  <kcfgfile name=""/>
+    <kcfgfile name=""/>
 
-  <group name="General">
-    <entry name="switches" type="String">
-      <default></default>
-    </entry>
+    <group name="General">
+        <entry name="iconName" type="String">
+            <default></default>
+        </entry>
 
-    <entry name="checked" type="string">
-      <default>false</default>
-    </entry>
+        <entry name="compactName" type="string">
+            <default>Compact Switch</default>
+        </entry>
 
-    <entry name="defaultPosition" type="String">
-      <default>false</default> <!-- Valeur par défaut pour la propriété defaultPosition -->
-    </entry>
+        <entry name="boldTextCompact" type="bool">
+            <default>false</default>
+        </entry>
 
-    <entry name="swapLabels" type="Bool">
-      <default>false</default>
-    </entry>
+        <entry name="italicTextCompact" type="bool">
+            <default>false</default>
+        </entry>
 
+        <entry name="compactNameColor" type="string">
+            <default></default>
+        </entry>
 
-    <entry name="onScript" type="String">
-      <label>Script to execute when toggled on</label>
-      <default>sleep 2; exit 0</default>
-    </entry>
+        <entry name="compactLabelVisible" type="bool">
+            <default>true</default>
+        </entry>
 
-    <entry name="offScript" type="String">
-      <label>Script to execute when toggled off</label>
-      <default>sleep 1; exit 0</default>
-    </entry>
+        <entry name="checked" type="bool">
+            <default>false</default>
+        </entry>
 
+        <entry name="oncompactScript" type="String">
+            <default>sleep 5; exit 0</default>
+        </entry>
+        <entry name="offcompactScript" type="String">
+            <default>sleep 5; exit 0</default>
+        </entry>
 
-    <entry name="onScriptEnabled" type="Bool">
-      <label>Enable to run the onScript upon toggling on</label>
-      <default>true</default>
-    </entry>
-
-<entry name="offScriptEnabled" type="Bool">
-      <label>Enable to run the offScript upon toggling off</label>
-      <default>true</default>
-    </entry>
-
-
-
+        <entry name="runStatusOnStartCompact" type="bool">
+            <default>false</default>
+        </entry>
 
 
+        <entry name="compactDefaultPosition" type="bool">
+            <default>true</default>
+        </entry>
 
-    <entry name="statusScriptEnabled" type="String">
-      <label>Check to enable script checking status</label>
-      <default>false</default>
-    </entry>
-    <entry name="statusScript" type="String">
-      <label>Script to execute to check status</label>
-      <default>/bin/status_script.sh</default>
-    </entry>
-    <entry name="runStatusOnStart" type="Bool">
-      <label>Run status script on start</label>
-      <default>false</default>
-    </entry>
-    <entry name="updateInterval" type="Int">
-      <label>Interval to run status script</label>
-      <default>2</default>
-    </entry>
-    <entry name="updateIntervalUnit" type="Int">
-        <label>Unit to run status script</label>
-        <default>1</default>
-    </entry>
-    <entry name="interval" type="Int">
-        <label>Used internally - interval 2 minutes</label>
-        <default>120</default>
-    </entry>
+        <entry name="compactCustomDefaultPosition" type="bool">
+            <default>false</default>
+        </entry>
 
 
+        <entry name="toolTipMainCompactText" type="string">
+            <default></default>
+        </entry>
 
+        <entry name="toolTipSubCompactText" type="String">
+            <default></default>
+        </entry>
 
+        <entry name="toolTipSubCompactTextOutPut" type="bool">
+            <default>true</default>
+        </entry>
 
+        <entry name="interval" type="int">
+            <default>1000</default>
+        </entry>
 
+        <entry name="intervalRun" type="bool">
+            <default>false</default>
+        </entry>
 
+        <entry name="startnotifOnCompact" type="bool">
+            <default>false</default>
+        </entry>
 
+        <entry name="notifTitleOnCompact" type="string">
+            <default></default>
+        </entry>
 
+        <entry name="notifTextOnCompact" type="string">
+            <default></default>
+        </entry>
 
+        <entry name="iconOnCompact" type="string">
+            <default>emblem-success</default>
+        </entry>
 
+        <entry name="startnotifOffCompact" type="bool">
+            <default>false</default>
+        </entry>
 
-  </group>
+        <entry name="notifTitleOffCompact" type="string">
+            <default></default>
+        </entry>
+
+        <entry name="notifTextOffCompact" type="string">
+            <default></default>
+        </entry>
+
+        <entry name="iconOffCompact" type="string">
+            <default>emblem-remove</default>
+        </entry>
+    </group>
+
+    <group name="Switch">
+        <entry name="switches" type="String">
+            <default>[{"name": "Default Group Switch", "switchId": "defaultGroupSwitch", "isGroup": true, "isMain": false, "rowIndex": "0", "columnIndex": "0",
+                "checked": false, "defaultPosition": true, "customDefaultPosition": false,
+                "positionByCompact": false, "positionByGroup": false,
+                "onScript": "sleep 5; exit 0",
+                "offScript": "sleep 5; exit 0",
+                "runStatusOnStart": true, "displayName": true, "switchNameColor": "", "boldText": true, "italicText": false, "tooltipFullEnabled": true, "toolTipFullMainText": "Default Group Switch", "toolTipFullSubText": "This is the default description of the Group Switch. A Switch Group creates a new column and can control the activation of all the switches in its column. This description can be edited or disabled in the options.",
+
+                 "startnotifOn": true, "startnotifOff": true, "notificationTitleOn": "Switch activation", "notificationTextOn": "This notification is displayed because the switch Group has been activated", "iconOn": "emblem-success", "notificationTitleOff": "Switch deactivation", "notificationTextOff": "This notification is displayed because the switch Group has been deactivated", "iconOff": "emblem-remove"}]</default>
+        </entry>
+    </group>
+
 </kcfg>
