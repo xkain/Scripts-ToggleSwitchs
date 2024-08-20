@@ -1,11 +1,17 @@
-# On-Off Scripts ToggleSwitchs Plasmoid 
+<div align="center">
+   
+   # Scripts ToggleSwitchs  
+   
+This is a plasmoid runs scripts with configurable on/off switches for KDE Plasma 6.
+
+</div>
 
 *In development
 
-This is a plasmoid runs scripts with configurable on/off switches for KDE Plasma 6.
 
 
-## Captures :
+
+## Gallery :
 
 <p align="center">
 
@@ -23,6 +29,20 @@ This is a plasmoid runs scripts with configurable on/off switches for KDE Plasma
 </br>
    
 </p>
+
+## Installing
+
+Install the widget from the KDE Store [Plasma 6 version](https://store.kde.org/p/2183752)
+
+1. **Right click on the Desktop** > **Edit Mode** > **Add Widgets** > **Get New Widgets** > **Download new...**
+2. **Search** for "**Scripts ToggleSwitchs**", install and add it to your Panel/Desktop.
+
+
+
+
+
+
+
 
 
 ## Current and *planned* features
