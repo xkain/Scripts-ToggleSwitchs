@@ -32,10 +32,46 @@ This is a plasmoid runs scripts with configurable on/off switches for KDE Plasma
 
 ## Installing
 
-Install the widget from the KDE Store [Plasma 6 version](https://store.kde.org/p/2183752)
+
+## Prerequisites:
+* Linux based Operating System
+
+* [KDE Plasma Desktop Environment](https://kde.org/plasma-desktop/)
+
+
+<h1 align="center">Get it from</h1>
+
+<p align="center">
+   <a href="https://store.kde.org/p/1897850"><img height="50px" src="https://img.shields.io/badge/KDE%20Store-informational?style=for-the-badge&logo=KDE" /></a>
+   <a href="https://www.pling.com/p/1897850"><img height="50px" src="https://img.shields.io/badge/Pling%20Store-informational?style=for-the-badge&color=orange" /></a> 
+   <a href="https://www.opendesktop.org/p/1897850"><img height="50px" src="https://img.shields.io/badge/openDesktop-informational?style=for-the-badge&color=blueviolet" /></a>
+</p>
+
+<p align="center">Install it directly from any of the above mentioned sources</p>
+
+<p align="center">or</p>
+
 
 1. **Right click on the Desktop** > **Edit Mode** > **Add Widgets** > **Get New Widgets** > **Download new...**
 2. **Search** for "**Scripts ToggleSwitchs**", install and add it to your Panel/Desktop.
+
+
+
+
+
+
+<p align="center">If you have download the file, extract it, open a terminal in the directory containing the `metadata.desktop` file and execute the following command:</p>
+
+
+
+
+
+
+
+
+
+
+
 
 
 
